@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $comment = "";
     } else {
         $comment = test_input($_POST["comment"]);
+        $comment = wordwrap($comment, 70);
     }
 
     if (empty($_POST["gender"])) {
@@ -46,6 +47,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $gender = test_input($_POST["gender"]);
     }
+
+    /** Envio de e-mail */
+    $para = 'fabi.tuany@gmail.com';
+    $assunto = 'E-mail através de formulário - Escolinha GerTec';
+    $mensagem = "De: $name <$email> \r\n";
+    $mensagem .= "Website: $website \r\n";
+    $mensagem .= "Gênero: $gender \r\n";
+    $mensagem .= "Comentários: \r\n\n $comment";
+
+    $headers = "From: $name <$email>" . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+    if (strlen($nameErr) == 0 && strlen($emailErr) == 0 && strlen($websiteErr) == 0) {
+        mail($para, $assunto, $mensagem, $headers);
+        $statusMail = TRUE;
+    } else
+        $statusMail = FALSE;
+
+    /** Fim da função de envio de e-mail */
 }
 
 //Limpeza dos dados de entrada
@@ -117,6 +137,14 @@ function test_input($data) {
             <input type="submit" name="submit" value="Submit"> 
 
         </form>
+
+        <?php
+        if (isset($statusMail) && $statusMail) {
+            echo "<h1>E-mail enviado!</h1>";
+        } else {
+            echo "<h1 class='err'>E-mail não enviado!</h1>";
+        }
+        ?>
 
     </body>
 </html>
