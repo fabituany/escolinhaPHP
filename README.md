@@ -1,2 +1,2 @@
 # escolinhaPHP
-Curso de PHP Geração Tec 2° semestre - 2015
+Curso de PHP Geração Tec 2º semestre -  2015
