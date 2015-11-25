@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Cadastrop de e-mail</title>
+        <title>Cadastro de e-mail</title>
     </head>
     <body>
         <form action="cadastro.php" method="post">
