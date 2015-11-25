@@ -1,7 +1,7 @@
 <?php
 
-//variáveis necessárias para conexão com o BD
+//Variáveis necessárias para conexão com o BD
 $host = 'localhost';
 $dbname = 'escolinha';
 $username = 'escolinha';
-$password = '12345';
+$password = 'pq4JJ2dC4RFdz2q5';
