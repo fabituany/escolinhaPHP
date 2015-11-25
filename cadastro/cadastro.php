@@ -1,7 +1,10 @@
 <?php
 
 //Faz a requisição de dados paraconexão com o BD
-require_once 'dbconfig.php';
+if ($SERVER['SERVER_ADDR'] == '127.0.0.1')
+    require_once 'dbconfig.php';
+else
+    require_once 'dbconfighostinger.php';
 
 //Inclusão da função que envia o e-mail
 include_once 'emailConfirma.php';
@@ -60,15 +63,15 @@ if (isset($_POST['btn'])) {
         $p = $conn->prepare($sql);
         $q = $p->execute($parametros);
 
-        /**Envio de e-mail para confirmação*/
-        
+        /*         * Envio de e-mail para confirmação */
+
         //Link para ser enviado por e-mail
         $link = "<a href='http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
         $link .= "?cod=e&hash=$r[cod]'";
         $link .= "Clique para confirmar seu e-mail";
         $link .= "</a>";
 
-        emailConfirma($email,$link);
+        emailConfirma($email, $link);
 
 
         //Listagem de e-mails
